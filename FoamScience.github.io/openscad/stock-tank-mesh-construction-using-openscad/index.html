@@ -1,0 +1,539 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Stock-Tank mesh construction using OpenSCAD - FoamScience</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="FoamScience OpenFOAM,"> 
+    <meta name="description" content="This post is part of a longer collection:
+
+OpenSCAD 101: Basics of the OpenSCAD language
+OpenSCAD T,"> 
+    <meta name="author" content="Fadeli Mohamed Elwardi"> 
+    <link rel="alternative" href="atom.xml" title="FoamScience" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link href="https://fonts.loli.net/css?family=Roboto+Mono|Rubik&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+    <link rel="stylesheet" href="/css/obsidian.css">
+    <link rel="stylesheet" href="/css/ball-atom.min.css">
+
+  <link rel="amphtml" href="https://foamscience.github.io/openscad/stock-tank-mesh-construction-using-openscad//amp/index.html">
+
+</head>
+</html>
+
+<body class="loading">
+    <div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <span id="config-title" style="display:none">FoamScience</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://foamscience.github.io">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">Stock-Tank mesh construction using OpenSCAD</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="douban,diandian,tencent"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="section">
+        <div class=article-header-wrapper>
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(https://s2.ax1x.com/2019/09/18/n7E8Wd.png);">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="/categories/openscad"><b>「
+                    </b>OPENSCAD<b> 」</b></a>
+                
+                July 01, 2018
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/openscad/stock-tank-mesh-construction-using-openscad/" title="Stock-Tank mesh construction using OpenSCAD">Stock-Tank mesh construction using OpenSCAD</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>Words count</i>
+                    8.5k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                    8 mins.
+                </span>
+                
+                
+                
+                <span id="busuanzi_container_page_pv">
+                    <b class="iconfont icon-read"></b> <i>Read count</i>
+                    <span id="busuanzi_value_page_pv">0</span>
+                </span>
+                
+            </p>
+            
+            
+            <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Meshing/">Meshing</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/OpenSCAD/">OpenSCAD</a></li></ul>
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s">Constructing OpenFOAM meshes with blockMesh utility can get really tricky, that's  why I prefer to create geometry STL models with OpenSCAD first and then mesh them.</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class='main'>
+        <div class="content markdown animated fadeIn">
+            <p>This post is part of a longer collection:</p>
+<ul>
+<li><a href="/openscad-basics/">OpenSCAD 101: Basics of the OpenSCAD language</a></li>
+<li><a href="/openscad-transformations-boolean-operations/">OpenSCAD Transformations &amp; Boolean Ops</a></li>
+<li><a href="/openscad-cfd-usage-examples/">OpenSCAD CFD-oriented Usage Examples</a></li>
+</ul>
+<p>It features a very simple, quick and efficient way of constructing a (2D) stock-tank geometry and similar shapes using <strong>OpenSCAD</strong>.</p>
+<p>The main reason I present this way of thinking here is that I don’t think <code>blockMesh</code> is quite the right tool for such tasks; even when used with a powerful macro language, like <em>m4</em>.</p>
+<p>Well, there are a couple of things I expect you to be proficient in:</p>
+<ul>
+<li>A decent text editor should be used (I’m using VIM) to edit OpenSCAD scripts:  It’s good to have something that allows for quick basic calculations to be inserted,  or at least, provide access to the shell.</li>
+<li>Basic Knowledge of some interpreted languages (Python, Lua, Ruby … etc, pick the one you like, I usually use Python): They are great to test ideas quickly.</li>
+</ul>
+<p>As an example mesh, we will be creating the one presented in the following<br>figure:</p>
+<p><img src="/assets/img/OpenSCAD/tank-model-sketch.png" alt="Sketch of desired OpenSCAD model"></p>
+<p>Of course, model dimensions don’t matter because the goal is to create a parametric one.</p>
+<h1 id="A-one-time-deal-Hard-code-everything-in-OpenSCAD-scripts"><a href="#A-one-time-deal-Hard-code-everything-in-OpenSCAD-scripts" class="headerlink" title="A one time deal: Hard code everything in OpenSCAD scripts!"></a>A one time deal: Hard code everything in OpenSCAD scripts!</h1><p>Constructing the stock-tank model point-by-point is not as hard as you might think:</p>
+<ol>
+<li>Create <strong>points</strong> and <strong>paths</strong> vectors (if necessary) using your text editor.</li>
+<li>Run <code>linear_extrude</code> on resulting polygon.</li>
+</ol>
+<p>The first step strongly depends on used text editor; In VIM,  I have this awesome vim command defined in my <em>.vimrc</em> file:</p>
+<pre><code class="vim">command! -nargs=+ Calc :read !python -c &quot;from math import *;
+            \ import numpy as np;
+            \ np.set_printoptions(precision=4);
+            \ &lt;args&gt;&quot;</code></pre>
+<p>Which allows me to run Python code directly via VIM (imports are kind of important here).</p>
+<p>If, for example, I need a set of points to define an “arc” of <strong>radius = 1</strong> between <code>[10,1]</code> and <code>[12,1]</code> points,<br>I only need to issue the following VIM command while editing the SCAD script:</p>
+<pre><code class="vim">:Calc l=np.linspace(10,12,10); m=np.mat([l,1+np.sqrt(1-(l-11)**2)]); print(m.transpose().tolist())</code></pre>
+<p>Which will insert all points into the current file (actually, the print command is the one responsible for this). <code>linear_extrude</code>‘s default <code>paths</code> vector is usually fine.</p>
+<h2 id="Is-it-a-bad-idea-to-do-things-this-way"><a href="#Is-it-a-bad-idea-to-do-things-this-way" class="headerlink" title="Is it a bad idea to do things this way?"></a>Is it a bad idea to do things this way?</h2><p>Yes, it is. These tricks may work if one only needs to prototype something, or if one desires to check whether an idea is good enough to be implemented!  But they fail badly in real situations, where users absolutely have to create a parametric model.</p>
+<p>Fortunately, similar tricks often suggest possible approaches to the task at hand: Notice that we used Python’s <strong>list comprehensions</strong> to create <em>numpy</em> vectors; So, why not using <strong>OpenSCAD list comprehensions</strong> to create OpenSCAD vectors?</p>
+<h1 id="Parametric-design-of-a-stock-tank"><a href="#Parametric-design-of-a-stock-tank" class="headerlink" title="Parametric design of a stock tank"></a>Parametric design of a stock tank</h1><h2 id="Better-than-hard-coding-points-but-still-not-an-optimal-approach"><a href="#Better-than-hard-coding-points-but-still-not-an-optimal-approach" class="headerlink" title="Better than hard-coding points, but still not an optimal approach"></a>Better than hard-coding points, but still not an optimal approach</h2><p>Instead of relying on the power of a text editor, it might be a good idea to use list comprehensions to build needed points. Here’s a complete OpenSCAD script explaining the situation:</p>
+<pre><code class="clike">
+// Points of the lower arc:
+// half-a-circle, radius = 1, between [10,1] and [12,1]
+// which means center is [11,1]
+list1 = [ for (i = [10 : 0.1 : 12]) [i, 1+sqrt(1-pow((i-11),2))] ];
+// Points of the upper arc
+// half-a-circle, radius = 2, between [9,1] and [13,1]
+// which means center is [11,1]
+list2 = [ for (i = [13 : -0.1 : 9]) [i, 1+sqrt(4-pow((i-11),2))] ];
+// Repeating code, --&gt; consider a function
+
+// polygon points, just some concatenated lists
+points = concat(
+    [[0,0], [10,0]],
+    list1,
+    [[12, -3], [13, -3]],
+    list2,
+    [[8,1], [8,8], [4,8], [4,4], [3,4], [3,6], [0,6]]
+    );  
+
+// Default behavior of polygon module
+paths = [ for (i = [0 : 1 : len(points)-1]) i ];
+
+// The actual 3D model
+linear_extrude(2,[0,0]) polygon(points, [paths]);
+</code></pre>
+<p>This is certainly a better approach, but we still need to do some adjustments for easier parameterization: Let’s define an (object) module to create the boxes-like portion of our model.</p>
+<h2 id="Using-modules-to-construct-parametric-geometries"><a href="#Using-modules-to-construct-parametric-geometries" class="headerlink" title="Using modules to construct parametric geometries"></a>Using modules to construct parametric geometries</h2><pre><code class="clike">/*
+    Create an object model called tank.
+    Parameters:
+    - w: Base width, to interface with the &quot;arc-y region&quot;, default=1.
+    - tbh: Total Box height, defaults to 10.
+    - pbl: A list of partial box lengths, defaults to [6,4]
+    - pbw: A list of partial box &quot;widths&quot;, default = [3,1]
+    - st: Translate partial boxes in x-direction, defaults to [0,3]
+*/
+module tank (w=1, tbh=10, pbl=[6,4],pbw=[3,1],st=[0,3]) {
+
+        // create a parent cube, and subtruct all following objects
+        // You can also build this region box-by-box    
+        difference () {
+
+        // parent cube
+        cube([tbh,tbh,2]);
+
+        // A special box, allows for better connection with the arc.
+        translate([tbh-2*w,w,-0.01]) cube([2.001,tbh+0.01,3]);
+
+        // A set of helper boxes to create desired shape.
+        for (i=[0:len(pbl)-1]) translate([st[i]-0.01,pbl[i]-0.01,-0.01]) 
+            cube([pbw[i]+0.001,tbh,3]);
+        }   
+}</code></pre>
+<p>We can also define our own module to create arcs:</p>
+<pre><code class="cpp">/*
+    Create module named arc.
+    Parameters:
+    - r: inner radius, default=1.
+    - w: arc width, defaults to 1.
+    - ext: vertical extension length, defaults  to 3.
+*/
+module arc (r=1, w=1, ext=3) {
+    ar = r+w;
+
+    // points on arcs
+    list1 = [ for (i = [-r : 0.1 : r])
+        [i, sqrt(pow(r,2)-pow(i,2))] ];
+    list2 = [ for (i = [ar : -0.1 : -ar])
+        [i, sqrt(pow(ar,2)-pow(i,2))] ];
+
+    points = concat(
+        [[-ar,0]],
+        list1,
+        [[r, -ext], [ar, -ext]],
+        list2
+        );
+
+    // Default behavior of polygon, but let&#39;s
+    // specify it.
+    paths = [ for (i = [0 : 1 : len(points)-1]) i ];
+    linear_extrude(2) polygon(points, [paths]);
+}</code></pre>
+<p>To make sense of module arguments, refer to the following figure:</p>
+<p><img src="/assets/img/OpenSCAD/tank-model-boxes.png" alt="Partially parametric OpenSCAD model"></p>
+<p>Now, creating basic models is as simple as issuing:</p>
+<pre><code class="cpp">union() {
+    tank();
+    translate([11,1]) arc();
+}</code></pre>
+<p>More complicated models can be easily derived by overwriting default parameter values:</p>
+<pre><code class="cpp">union() {
+    tank(tbh=15, pbl=[6,4,10],pbw=[3,1,5],st=[0,3,4]);
+    translate([16,1]) arc();
+    translate([-2,6,2]) rotate([0,180,0]) arc(r=2);
+}</code></pre>
+<p>Which results in:</p>
+<p><img src="/assets/img/OpenSCAD/tank-model.png" alt="Final OpenSCAD parametric model"></p>
+<blockquote>
+<p>There may be simpler ways to achieve these results, but this approach is most useful for users who want to practice creating 3D geometry models with <strong>OpenSCAD</strong>.</p>
+</blockquote>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls"
+                data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+            <ul id="audio-list" style="display:none">
+                
+                
+                <li title='0' data-url='/statics/chengdu.mp3'></li>
+                
+                    
+            </ul>
+            
+            
+            
+        </div>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="https://res.cloudinary.com/tridiamond/image/upload/v1573019751/TriDiamond_logo_ui_xeublz.jpg" height=300 width=300></img>
+                    <p>Fadeli Mohamed Elwardi</p>
+                    <span>Think like an artist, develop like an artisan</span>
+                    <dl>
+                        <dd><a href="https://github.com/FoamScience" target="_blank"><span
+                                    class=" iconfont icon-github"></span></a></dd>
+                        <dd><a href="https://twitter.com/Elwardi-Fadeli" target="_blank"><span
+                                    class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="https://stackoverflow.com/users/7602324/elwardifadeli?tab=profile" target="_blank"><span
+                                    class=" iconfont icon-stack-overflow"></span></a></dd>
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">14 <p>Articles</p></a></li>
+                    <li><a href="/categories">5 <p>Categories</p></a></li>
+                    <li><a href="/tags">14 <p>Tags</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>Contents</h4>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#A-one-time-deal-Hard-code-everything-in-OpenSCAD-scripts"><span class="toc-number">1.</span> <span class="toc-text">A one time deal: Hard code everything in OpenSCAD scripts!</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Is-it-a-bad-idea-to-do-things-this-way"><span class="toc-number">1.1.</span> <span class="toc-text">Is it a bad idea to do things this way?</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Parametric-design-of-a-stock-tank"><span class="toc-number">2.</span> <span class="toc-text">Parametric design of a stock tank</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Better-than-hard-coding-points-but-still-not-an-optimal-approach"><span class="toc-number">2.1.</span> <span class="toc-text">Better than hard-coding points, but still not an optimal approach</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Using-modules-to-construct-parametric-geometries"><span class="toc-number">2.2.</span> <span class="toc-text">Using modules to construct parametric geometries</span></a></li></ol></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div>
+</body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2019
+        <span class="gradient-text">
+            Fadeli Mohamed Elwardi
+        </span>.
+        Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+        Theme
+        <span class="gradient-text">
+            <a href="https://github.com/TriDiamond/hexo-theme-obsidian" title="Obsidian" target="_blank" rel="noopener">Obsidian</a>
+        </span>
+        <small><a href="https://github.com/TriDiamond/hexo-theme-obsidian/blob/master/CHANGELOG.md" title="v1.4.4" target="_blank" rel="noopener">v1.4.4</a></small>
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/vim/vim.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/vbscript/vbscript.min.js"></script>
+
+
+
+    <script src="/js/busuanzi.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            if ($('span[id^="busuanzi_"]').length) {
+                initialBusuanzi();
+            }
+        });
+    </script>
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-149874671-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-149874671-1');
+    </script>
+
+
+
+
+
+<script>
+    function initialTyped () {
+        var typedTextEl = $('.typed-text');
+        if (typedTextEl && typedTextEl.length > 0) {
+            var typed = new Typed('.typed-text', {
+                strings: ["Think like an artist, develop like an artisan", "艺术家思维去思考问题，工匠创造精神去开发"],
+                typeSpeed: 90,
+                loop: true,
+                loopCount: Infinity,
+                backSpeed: 20,
+            });
+        }
+    }
+
+    if ($('.article-header') && $('.article-header').length) {
+        $(document).ready(function () {
+            initialTyped();
+        });
+    }
+</script>
+
+
+
+
+</html>

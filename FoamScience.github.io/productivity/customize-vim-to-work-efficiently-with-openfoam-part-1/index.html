@@ -1,0 +1,540 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Customize VIM to work efficiently with OpenFOAM - Part 1 - FoamScience</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="FoamScience OpenFOAM,"> 
+    <meta name="description" content="Today, I’m starting new (short) post series suggesting tricks to customize the VIM text editor so i,"> 
+    <meta name="author" content="Fadeli Mohamed Elwardi"> 
+    <link rel="alternative" href="atom.xml" title="FoamScience" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link href="https://fonts.loli.net/css?family=Roboto+Mono|Rubik&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+    <link rel="stylesheet" href="/css/obsidian.css">
+    <link rel="stylesheet" href="/css/ball-atom.min.css">
+
+  <link rel="amphtml" href="https://foamscience.github.io/productivity/customize-vim-to-work-efficiently-with-openfoam-part-1//amp/index.html">
+
+</head>
+</html>
+
+<body class="loading">
+    <div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <span id="config-title" style="display:none">FoamScience</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://foamscience.github.io">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">Customize VIM to work efficiently with OpenFOAM - Part 1</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="douban,diandian,tencent"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="section">
+        <div class=article-header-wrapper>
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(https://s2.ax1x.com/2019/09/18/n7E8Wd.png);">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="/categories/productivity"><b>「
+                    </b>PRODUCTIVITY<b> 」</b></a>
+                
+                August 27, 2018
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/productivity/customize-vim-to-work-efficiently-with-openfoam-part-1/" title="Customize VIM to work efficiently with OpenFOAM - Part 1">Customize VIM to work efficiently with OpenFOAM - Part 1</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>Words count</i>
+                    13k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                    12 mins.
+                </span>
+                
+                
+                
+                <span id="busuanzi_container_page_pv">
+                    <b class="iconfont icon-read"></b> <i>Read count</i>
+                    <span id="busuanzi_value_page_pv">0</span>
+                </span>
+                
+            </p>
+            
+            
+            <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/OpenFOAM/">OpenFOAM</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Vim/">Vim</a></li></ul>
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s">Working with OpenFOAM case files gets really tedious if the text editor is not 	 selected properly; and with VIM I still feel like missing some features, that's why 	 customizing VIM for such tasks is the best path to take</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class='main'>
+        <div class="content markdown animated fadeIn">
+            <p>Today, I’m starting new (short) post series suggesting tricks to customize the <strong>VIM</strong> text editor so it can be used to edit OpenFOAM cases more efficiently. Of course, making VIM work optimally with every single piece of software you have installed through scripting is a bit of “over-kill”; but having it configured properly is crucial.</p>
+<blockquote>
+<p>These series of posts are for those who are ready to write some lines of VIML code to add interesting functionality to VIM (OpenFOAM-wise).</p>
+</blockquote>
+<h2 id="VIM-Plugins-for-OpenFOAM"><a href="#VIM-Plugins-for-OpenFOAM" class="headerlink" title="VIM Plugins for OpenFOAM"></a>VIM Plugins for OpenFOAM</h2><p>We can easily customize our VIM installation using our own scripts, sourced in the <code>.vimrc</code> file. The versatility of VIM allows for sharing these scripts between users, we then call the scripts: <em>Plug-ins</em>.</p>
+<p>These plugins differ in both their goal and their implementation:</p>
+<ul>
+<li>General purpose plugins. Eg. for handling text formatting, VIM configuration.</li>
+<li>File-Type specific plugins. Eg. those which operate only on C source/header files.</li>
+<li>Syntax highlighting. Eg. highlight OpenFOAM keywords in a OpenFOAM dictionary.</li>
+<li>Compiler plugins. Eg. interpret a python script from VIM command line and jump to errors.</li>
+</ul>
+<p>As OpenFOAM users, we’ll naturally be interested in any C++ related plugins in addition to few OpenFOAM-specific ones.</p>
+<h3 id="Syntax-Highlighting-of-OPENFOAM-dictionaries-in-VIM"><a href="#Syntax-Highlighting-of-OPENFOAM-dictionaries-in-VIM" class="headerlink" title="Syntax Highlighting of OPENFOAM dictionaries in VIM"></a>Syntax Highlighting of OPENFOAM dictionaries in VIM</h3><p>It’s always good to have keyword-specific highlighting of a file; It helps you instantly catch misspelled keywords, it makes understanding the file easier; and with appropriate color themes, it makes you feel comfortable while editing the file.</p>
+<p>There is already a VIM plugin that takes care of OpenFOAM keywords highlighting (Vim-OpenFOAM-syntax). It’s true that the plugin does some weird stuff (eg. loading weird files into the buffer list) but, in general, it’s good for the job of highlighting OpenFOAM syntax. To install it on your system, follow the instructions at <a href="https://github.com/effi/vim-OpenFoam-syntax" target="_blank" rel="noopener">Vim-OpenFoam-syntax</a> on github, or the fork for manual installation (not that scary) <a href="https://bitbucket.org/shor-ty/vimextensionopenfoam" target="_blank" rel="noopener">Vim-Extension-OpenFOAM</a> on bitbucket.</p>
+<p>While programming, I usually use a couple of VIM plugins:</p>
+<ul>
+<li><em>c-support</em>: to turn VIM into a C/C++ IDE (code snippets … etc).</li>
+<li><em>taglist</em>: to browse source code efficiently</li>
+</ul>
+<h2 id="Your-own-VIM-scripts"><a href="#Your-own-VIM-scripts" class="headerlink" title="Your own VIM scripts"></a>Your own VIM scripts</h2><p>In this blog post, we’ll write a very small VIM script, called <code>customFoam.vim</code>,  which is capable of doing a couple of things:</p>
+<ul>
+<li>It needs to be aware of the current file’s FileType.</li>
+<li>When the file is of type <code>foam</code>, VIM should set a couple of things up:<ul>
+<li>Changing the path variable for the <code>:find</code> command so it includes our case’s directory.</li>
+<li>Changing VIM’s current directory to case directory.</li>
+</ul>
+</li>
+<li>At this moment, that’s all, but we’ll add some stuff in the upcoming blog posts.</li>
+</ul>
+<h3 id="First-steps-Determining-file-types"><a href="#First-steps-Determining-file-types" class="headerlink" title="First steps: Determining file types"></a>First steps: Determining file types</h3><p>There are two common ways to determine a file type for a file:</p>
+<ul>
+<li>Use the extension in its same; I call it the <code>lazy Windows way</code>: for example ,files that have names ending with <code>.html</code> are considered HTML files no matter what their content is.</li>
+<li>Take a look at the file’s content then decide; This is the Unix way, which we’ll be using here: It just means we’ll search the content of a file for the line that says <code>FoamFile</code>.</li>
+</ul>
+<p>We are not the first ones who try to detect <code>foam</code> file type in VIM; the <em>vim-OpenFoam-syntax</em> plugin already does that. Actually, it assigns different file types for different <code>foam</code> files. For example, it sets: <code>ft=&quot;foam256_thermodynamicProperties&quot;</code> for <code>thermodynamicProperties</code> dictionaries, but in general, its sets the file type to <code>foam256_general</code>.</p>
+<p>Thus, if you have the plugin installed, you already have the required means to detect <code>foam</code> file type. However, for the sake of leaning VIM, we’ll illustrate a very quick way to do it (but not that efficient!).</p>
+<p>All what we have to do is to write a small script -which contains only one function- searching the first few lines of a file for the keyword <code>FoamFile</code>.<br>This tells VIM that the file is a <code>OpenFOAM Dictionary File</code>:</p>
+<pre><code class="vim">&quot; Filename: foamFT.vim
+
+&quot; No debug stuff
+&quot; Should check if the file type is already set
+&quot; But it&#39;s OK; just set it again
+
+function! SetFoamType()
+    &quot; loop through the first 10 lines
+    &quot; FoamFile is at line 8 usually
+    for nL in range(1,10)
+    &quot; match &#39;FoamFile&#39;
+        if (getline(nL) =~ &#39;FoamFile&#39;)
+            setfiletype foam
+            &quot; if file type is set, leave the loop
+            break
+        endif
+    endfor
+endfunction
+
+&quot; That&#39;s it!
+&quot; Now, when to call it?
+augroup FOAMFTautocmds
+autocmd!
+autocmd BufRead * call SetFoamType()
+augroup End</code></pre>
+<p>To check whether the script works or not; Just execute the ex-command <code>:set ft</code> while an OpenFOAM dictionary is loaded. If it works, the output should say <em>filetype=foam</em>.</p>
+<h3 id="Now-we-know-the-filetype-then-what"><a href="#Now-we-know-the-filetype-then-what" class="headerlink" title="Now we know the filetype, then what?"></a>Now we know the filetype, then what?</h3><p>Well, <strong>VIM</strong> knows <em>what</em> we are editing, but it doesn’t know <em>where</em> we are editing it. In fact, it does know the exact path to the current file (try running the ex-command <code>:pwd</code>): VIM considers the startup-directory as your current directory; and to change it, guess what, we have to use the <code>:cd</code> (change directory!) command.</p>
+<p>If you invoke VIM from the case directory, you’ll have the advantage of file names auto-completion in command-line mode; that is, when you type <code>:e c&lt;TAB&gt;</code>, VIM automatically completes <em>constant</em> for you. But, if, for example, you invoke it from the system directory of a case, it won’t know about the files in the other directories (<em>0</em>, <em>constant</em> … etc).</p>
+<p>There’s also the super-useful command <code>:find</code> which finds the specified file in the path (could include multiple -independent- directories) and then edit it. The desired work-flow can be summarized as follows: While editing <code>blockMeshDict</code> in <em>system</em> directory of a case; type <code>:find t&lt;TAB&gt;</code>, which instantly expands to <code>:find transportProperties</code> (Note that this file is located under <em>constant</em> directory), then, hitting <em>ENTER</em> switches to that file to edit it.</p>
+<pre><code class="vim">&quot; Filename: customFoam.vim
+
+function! FOAMSetPathToCaseDir()
+    &quot; IF you care only for files in
+    &quot; system, 0, and constant, use
+    &quot; let caseDir = expand(&#39;%:p:h:h&#39;)
+    &quot; But, I&#39;m a regexp lover, so,
+    &quot; Make Vim remember everything in the path until case name.
+    &quot; delete everything else!
+    let caseDir = expand(&#39;%:p:s?\(\/.*run\/[a-zA-Z1-9\. ]*\)\/.*?\1?&#39;)
+    &quot; set path to include all subdirs of caseDir.
+    &quot; you can also use &#39;=+&#39; instead of &#39;=&#39; to add the caseDir to
+    &quot; the default path; but I like it this way.
+    exe &#39;set path=&#39;.caseDir.&#39;/**&#39;
+    &quot; I want to run blockMesh, solvers and other tools
+    &quot; Directly in VIM, so change dir to casedir
+    exe &#39;cd &#39;.caseDir
+endfunction
+
+&quot; This is just incredible
+
+augroup FOAMautocmds
+autocmd!
+autocmd FileType foam* call FOAMSetPathToCaseDir()
+augroup End</code></pre>
+<p>Let’s go through that script line-by-line, shall we?</p>
+<ul>
+<li><p><code>function! FOAMSetPathToCaseDir()</code> overwrites any function defined with this name (Remember, user-defined function names start with a capital letter). <code>endfunction</code> denotes the end of function block.</p>
+</li>
+<li><p>All lines preceded with ( <code>&quot;</code> ) are considered comments.</p>
+</li>
+<li><p>The line <code>let caseDir = expand(&#39;%:p:s?\(\/.*run\/[a-zA-Z1-9\. ]*\)\/.*?\1?&#39;)</code> needs deeper explanation: </p>
+<ol>
+<li>The standard function <code>let</code> defines Vim Variables (In this case, variables are local to the user-defined function).</li>
+<li><em>caseDir</em> is the name of our variable (a string). It is local to the function: To use a global variable inside a function, name it <code>g:var</code>, to make it available only in this script, use <code>s:var</code>, and, in fact, to use a local variable in a function, it should be called <code>l:var</code>, but this is tolerated.</li>
+<li>The standard function <code>expand</code> manipulates filenames (shortcut <em>%</em>) and paths to them, with modifiers:<ol start="4">
+<li><code>:p</code> prints the whole absolute path to the file, eg. while editing <em>blockMeshDict</em>,<br>the ex-command <code>echo expand(&#39;%:p&#39;)</code> should display something like<br><code>/home/path-to-case/system/blockMeshDict</code>.</li>
+<li><code>:h</code> removes the last entry in a path, eg. <code>echo expand(&#39;%:p:h&#39;)</code> would display<br><code>/home/path-to-case/system</code></li>
+<li><code>:s?pattern?string?</code> acts like the substitute command. <em>pattern</em> is a regular expression, and <em>string</em> accepts <strong>back-references</strong>; All the power one needs in one command.</li>
+<li>So, the regexp <code>\(\/.*run\/[a-zA-Z1-9\. ]*\)\/.*</code> remembers everything from the start of filename to “run” (hopefully, your OpenFOAM cases directory) to the first directory (that’s the case dir. at least for me). Case Name may contain alphabet characters, digits, dots and spaces (The last two are really bad options). The rest of the path is forgotten (eg. /system/blockMeshDict).</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<p>This way, we can find our path to the case no matter what case file we are editing!</p>
+<ul>
+<li><p>In the line <code>exe &#39;set path=&#39;.caseDir.&#39;/**&#39;</code> , the command <code>exe</code> (short for <code>execute</code>) executes the following string as an ex-command. Concatenation in VIML is done with a dot,  and because our <em>caseDir</em> variable is a string, and we are still inside the same function, it can be concatenated with other strings. The /** part expands to all sub-directories, to the last one of them, no matter how many levels of directories the case have.</p>
+</li>
+<li><p>The path variable is set so the <code>:find</code> command can help us a bit.</p>
+</li>
+<li><p>I like to change the directory to the case dir. so I can run commands directly from within VIM without worrying about which files I’m editing, or the start-up directory. For that, we simply use the <code>:cd</code> ex-command (VIM’s command).</p>
+</li>
+</ul>
+<p>The function is completed, now, we have to find a way to automate calling it: <code>auto-commands</code>. Simply, we group all of our autocmds in a group called <code>FOAMautocmds</code> (Good practice but optional) .</p>
+<ul>
+<li><p><code>autocmd!</code> overwrites previous autocmds of this group (often abbriviated as <code>au!</code> ).</p>
+</li>
+<li><p>We want to call the function when we open a file of type <code>foam*</code> (including <code>foam</code>, <code>foam_general</code> … etc), so we write: <code>autocmd FileType foam* call FOAMSetPathToCaseDir()</code><br>That’s it, source the script in your <code>.vimrc</code> file and you are good to test it out:</p>
+</li>
+<li><p>From the shell (from /../constant/polyMesh in an arbitrary OpenFOAM case, where the mesh is present) run <code>vim boundary</code></p>
+</li>
+<li><p>Now, in Vim, type <code>:fin tr&lt;TAB&gt;</code> (<code>fin</code> is a short form for <code>find</code>) then hit ENTER.</p>
+</li>
+<li><p>Check both the path and the working directory (using <code>:set path</code> and <code>:pwd</code> respectively).</p>
+</li>
+<li><p>You can issue <code>:!blockMesh</code> while editing the file to rebuild the mesh.</p>
+</li>
+</ul>
+<p>That’s it for now, the next post will explain ways to get the most of VIM compilers to run <code>blockMesh</code> and OpenFOAM solvers on cases right from inside VIM and browse errors.</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls"
+                data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+            <ul id="audio-list" style="display:none">
+                
+                
+                <li title='0' data-url='/statics/chengdu.mp3'></li>
+                
+                    
+            </ul>
+            
+            
+            
+        </div>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="https://res.cloudinary.com/tridiamond/image/upload/v1573019751/TriDiamond_logo_ui_xeublz.jpg" height=300 width=300></img>
+                    <p>Fadeli Mohamed Elwardi</p>
+                    <span>Think like an artist, develop like an artisan</span>
+                    <dl>
+                        <dd><a href="https://github.com/FoamScience" target="_blank"><span
+                                    class=" iconfont icon-github"></span></a></dd>
+                        <dd><a href="https://twitter.com/Elwardi-Fadeli" target="_blank"><span
+                                    class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="https://stackoverflow.com/users/7602324/elwardifadeli?tab=profile" target="_blank"><span
+                                    class=" iconfont icon-stack-overflow"></span></a></dd>
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">14 <p>Articles</p></a></li>
+                    <li><a href="/categories">5 <p>Categories</p></a></li>
+                    <li><a href="/tags">14 <p>Tags</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>Contents</h4>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#VIM-Plugins-for-OpenFOAM"><span class="toc-number">1.</span> <span class="toc-text">VIM Plugins for OpenFOAM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Syntax-Highlighting-of-OPENFOAM-dictionaries-in-VIM"><span class="toc-number">1.1.</span> <span class="toc-text">Syntax Highlighting of OPENFOAM dictionaries in VIM</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Your-own-VIM-scripts"><span class="toc-number">2.</span> <span class="toc-text">Your own VIM scripts</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#First-steps-Determining-file-types"><span class="toc-number">2.1.</span> <span class="toc-text">First steps: Determining file types</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Now-we-know-the-filetype-then-what"><span class="toc-number">2.2.</span> <span class="toc-text">Now we know the filetype, then what?</span></a></li></ol></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div>
+</body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2019
+        <span class="gradient-text">
+            Fadeli Mohamed Elwardi
+        </span>.
+        Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+        Theme
+        <span class="gradient-text">
+            <a href="https://github.com/TriDiamond/hexo-theme-obsidian" title="Obsidian" target="_blank" rel="noopener">Obsidian</a>
+        </span>
+        <small><a href="https://github.com/TriDiamond/hexo-theme-obsidian/blob/master/CHANGELOG.md" title="v1.4.4" target="_blank" rel="noopener">v1.4.4</a></small>
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/vim/vim.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/vbscript/vbscript.min.js"></script>
+
+
+
+    <script src="/js/busuanzi.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            if ($('span[id^="busuanzi_"]').length) {
+                initialBusuanzi();
+            }
+        });
+    </script>
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-149874671-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-149874671-1');
+    </script>
+
+
+
+
+
+<script>
+    function initialTyped () {
+        var typedTextEl = $('.typed-text');
+        if (typedTextEl && typedTextEl.length > 0) {
+            var typed = new Typed('.typed-text', {
+                strings: ["Think like an artist, develop like an artisan", "艺术家思维去思考问题，工匠创造精神去开发"],
+                typeSpeed: 90,
+                loop: true,
+                loopCount: Infinity,
+                backSpeed: 20,
+            });
+        }
+    }
+
+    if ($('.article-header') && $('.article-header').length) {
+        $(document).ready(function () {
+            initialTyped();
+        });
+    }
+</script>
+
+
+
+
+</html>

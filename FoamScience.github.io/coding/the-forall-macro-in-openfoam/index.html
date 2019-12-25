@@ -1,0 +1,452 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The forAll Macro in OpenFOAM - FoamScience</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="FoamScience OpenFOAM,"> 
+    <meta name="description" content="Because of the frequent use of range-like loops in OpenFOAM (In official code base, forks, and any ,"> 
+    <meta name="author" content="Fadeli Mohamed Elwardi"> 
+    <link rel="alternative" href="atom.xml" title="FoamScience" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link href="https://fonts.loli.net/css?family=Roboto+Mono|Rubik&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+    <link rel="stylesheet" href="/css/obsidian.css">
+    <link rel="stylesheet" href="/css/ball-atom.min.css">
+
+  <link rel="amphtml" href="https://foamscience.github.io/coding/the-forall-macro-in-openfoam//amp/index.html">
+
+</head>
+</html>
+
+<body class="loading">
+    <div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <span id="config-title" style="display:none">FoamScience</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://foamscience.github.io">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">The forAll Macro in OpenFOAM</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="douban,diandian,tencent"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="section">
+        <div class=article-header-wrapper>
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(/assets/images/ionic2-banner.png);">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="/categories/coding"><b>「
+                    </b>CODING<b> 」</b></a>
+                
+                August 29, 2019
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/coding/the-forall-macro-in-openfoam/" title="The forAll Macro in OpenFOAM">The forAll Macro in OpenFOAM</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>Words count</i>
+                    7.4k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                    7 mins.
+                </span>
+                
+                
+                
+                <span id="busuanzi_container_page_pv">
+                    <b class="iconfont icon-read"></b> <i>Read count</i>
+                    <span id="busuanzi_value_page_pv">0</span>
+                </span>
+                
+            </p>
+            
+            
+            <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Cpp/">Cpp</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/OpenFOAM/">OpenFOAM</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Programming/">Programming</a></li></ul>
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s">Macros in C++ code are hated by most developers, but OpenFOAM engineers don't care!     You can learn how to efficiently use this one and only one: forAll</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class='main'>
+        <div class="content markdown animated fadeIn">
+            <p>Because of the frequent use of range-like loops in OpenFOAM (In official code base, forks, and any independent work for that matter), the nice developers provided a “shortcut” to loop through all elements of a list; any list. This post tries to take a way the popular misuse of this shortcut: Believe it or not, people abuse the <code>forAll</code> macro in every which way.</p>
+<h2 id="The-forAll-macro-and-its-“friends”"><a href="#The-forAll-macro-and-its-“friends”" class="headerlink" title="The forAll macro and its “friends”"></a>The <code>forAll</code> macro and its “friends”</h2><p>First of all, we all know that <code>forAll</code> is not part of C++, so it is a user-defined macro. Assuming a recent fork/version of OpenFOAM is sourced, the definition of this macro and similar ones can be found by running the following shell commands:</p>
+<pre><code class="bash">cd $FOAM_SRC/$WM_PROJECT
+grep -r . -e &quot;define.*forAll&quot;</code></pre>
+<p>The previous command reveals that there are at least four (4, <code>foam-extend</code> has some more)  defined macros to loop through “collections”:</p>
+<ol>
+<li>The good old <code>forAll</code> and its reversed-looping version <code>forAllReverse</code>.</li>
+<li>A <code>forAllIter</code> macro specialized in iterating over a Container using an “iterator” and a const-version of it.</li>
+</ol>
+<p>Yep, browsing source code is extremely useful (These macros are defined in <code>UList.h</code>).</p>
+<p>People need to understand that <code>forAll(list, i)</code> is “just” a shortcut to <code>for (int i=0; i&lt;(list).size(); i++)</code>.<br>Although <code>i</code> is actually a <code>Foam::label</code> in standard OF versions. Strictly speaking; the macro just “works” on any container that has a <code>size()</code> member method (Think of it as a vector of a known size - at construction time). Such containers will probably (publicly) inherit from the <code>UList</code>  (The most lightweight-efficient base class I know of).</p>
+<p>Let’s examine a very simple example of constructing a <code>scalarList</code> (a <code>List&lt;scalar&gt;</code>, publicly inheriting from <code>UList&lt;scalar&gt;</code>).</p>
+<pre><code class="cpp">#include &quot;fvCFD.H&quot;
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+int main(int argc, char *argv[])
+{   
+    // Create a list of some scalars
+    scalarList someScalars(10, 0);
+
+    // Perfectly fine use of forAll
+    forAll(someScalars, sc)
+    {
+        someScalars[sc] = doSomeCalculations(sc);
+    };
+
+    Info&lt;&lt; &quot;End\n&quot; &lt;&lt; endl;
+    return 0;
+}</code></pre>
+<p>But this may be misleading; what if someone uses the macro to loop over a “different” type of containers, say a <code>dictionary</code>? Is <code>forAll</code> suitable for such tasks?</p>
+<p>The answer is in the previous example actually: Common use of <code>forAll</code> requires the list object to </p>
+<ul>
+<li>Have a <code>size()</code> method and</li>
+<li>Be <em>efficiently</em> indexable with some method/operator (<code>operator[]</code> in this case), otherwise, there is no benefit in looping through some collection if you can’t access its elements!!</li>
+</ul>
+<p>So, if <code>dictionary</code> objects verify these requirements; we’re golden.</p>
+<p>In fact, The <code>DictionaryBase</code> Template class publicly inherits from the (Link) List Type it is templated on. It’s easy to follow the inheritance diagram of the most commonly used class <a href="https://cpp.openfoam.org/v7/classFoam_1_1dictionary.html" target="_blank" rel="noopener">dictionary</a> to see that there is no <code>size()</code> method defined anywhere. Also, how would one refer to an entry as <code>dictionary[i]</code> ??</p>
+<p>It should be obvious now that <code>forAll</code> is not the right macro to use in this case. That’s where the second family of macros kicks in: Instead of using a (possibly more efficient) predefined-size containers, some situations require the use of “more dynamic” ones which only hold “pointers” to their begin/end positions. An iterator is then used to go back and forth between these positions.</p>
+<p>A nice usage of this macro can be found at line 175 of <a href="https://cpp.openfoam.org/v7/solution_8C_source.html" target="_blank" rel="noopener">solution.C</a> file so newer versions of OpenFOAM would understand older specification of <code>fvSolution.solver</code>.</p>
+<p>The <strong>const-iter</strong> version of <code>forAllIter</code> is also used to read entries of a <code>dictionary</code> into a <code>HashTable</code> … you can find an example at line 146 of <a href="https://cpp.openfoam.org/v7/HashPtrTableIO_8C_source.html" target="_blank" rel="noopener">HashPtrTableIO.C</a>.</p>
+<h2 id="A-word-on-UList-in-OpenFOAM"><a href="#A-word-on-UList-in-OpenFOAM" class="headerlink" title="A word on UList in OpenFOAM"></a>A word on <code>UList</code> in OpenFOAM</h2><p>As far as I can tell, this class is just “well written” - “well thought through”. Its purpose is  to provide an efficient base class for “Sub-Lists”. A quick look on <a href="https://cpp.openfoam.org/v7/classFoam_1_1UList.html#details" target="_blank" rel="noopener">the list of classes</a>  that directly inherit from it shows how important <code>UList</code> is.</p>
+<p>By the way, the class also holds a random access iterator; so it can be used with <code>forAllIter</code>:  We use an object (usually called <code>iter</code>) to “point” to a list item each time we iterate. The list item itself is accessed by dereferencing the pointer (<code>*iter</code>).</p>
+<p>I’m not aware of a way to get the “index” of an element in a List; It would be inefficient! So I never bothered to search for one. Another thing I should point out is that <code>std::distance</code> probably won’t work without some serious Type Casting :). It’s (was?) dangerous anyway, and I  don’t know if a similar function is available for OpenFOAM iterators).</p>
+<p>In fact, the use of <code>std::distance</code> takes away one the most important features of iterator-based loops: The ability to loop through a container where either <code>.begin()</code> or <code>.end()</code> is not reachable from the other (possibly by incrementing <code>iter</code>) as it results in “undefined behavior”.</p>
+<blockquote>
+<p>In recent OpenFOAM versions, <code>GeometricField</code> (<code>volScalarField</code>s …) inherits from <code>UList</code>, so, one can typically loop through their elements  with both macros; although  template specializations specialize the sense of “loop through their elements”: Some types  support looping through “internalField”; others make it so the loop hits everything.</p>
+</blockquote>
+<h2 id="A-word-on-dictionary-in-OpenFOAM"><a href="#A-word-on-dictionary-in-OpenFOAM" class="headerlink" title="A word on dictionary in OpenFOAM"></a>A word on <code>dictionary</code> in OpenFOAM</h2><p>This class a good example of a lot of things. “An iterator-based container” as I introduced it in  this post is just the tip of the iceberg. The reason I chose it for this post is that most OpenFOAM <em>users</em> consider a dictionary to be a “list” which is not entirely true. The similarity of, for example, getting some IDs (0, 1, 2, 3 … ) for mesh patches from the <code>boundary</code> files doesn’t mean a dictionary is indexable (I’m talking about “old-fashion” indexing here).</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls"
+                data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+            <ul id="audio-list" style="display:none">
+                
+                
+                <li title='0' data-url='/statics/chengdu.mp3'></li>
+                
+                    
+            </ul>
+            
+            
+            
+        </div>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="https://res.cloudinary.com/tridiamond/image/upload/v1573019751/TriDiamond_logo_ui_xeublz.jpg" height=300 width=300></img>
+                    <p>Fadeli Mohamed Elwardi</p>
+                    <span>Think like an artist, develop like an artisan</span>
+                    <dl>
+                        <dd><a href="https://github.com/FoamScience" target="_blank"><span
+                                    class=" iconfont icon-github"></span></a></dd>
+                        <dd><a href="https://twitter.com/Elwardi-Fadeli" target="_blank"><span
+                                    class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="https://stackoverflow.com/users/7602324/elwardifadeli?tab=profile" target="_blank"><span
+                                    class=" iconfont icon-stack-overflow"></span></a></dd>
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">14 <p>Articles</p></a></li>
+                    <li><a href="/categories">5 <p>Categories</p></a></li>
+                    <li><a href="/tags">14 <p>Tags</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>Contents</h4>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-forAll-macro-and-its-“friends”"><span class="toc-number">1.</span> <span class="toc-text">The forAll macro and its “friends”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#A-word-on-UList-in-OpenFOAM"><span class="toc-number">2.</span> <span class="toc-text">A word on UList in OpenFOAM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#A-word-on-dictionary-in-OpenFOAM"><span class="toc-number">3.</span> <span class="toc-text">A word on dictionary in OpenFOAM</span></a></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div>
+</body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2019
+        <span class="gradient-text">
+            Fadeli Mohamed Elwardi
+        </span>.
+        Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+        Theme
+        <span class="gradient-text">
+            <a href="https://github.com/TriDiamond/hexo-theme-obsidian" title="Obsidian" target="_blank" rel="noopener">Obsidian</a>
+        </span>
+        <small><a href="https://github.com/TriDiamond/hexo-theme-obsidian/blob/master/CHANGELOG.md" title="v1.4.4" target="_blank" rel="noopener">v1.4.4</a></small>
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/vim/vim.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/vbscript/vbscript.min.js"></script>
+
+
+
+    <script src="/js/busuanzi.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            if ($('span[id^="busuanzi_"]').length) {
+                initialBusuanzi();
+            }
+        });
+    </script>
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-149874671-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-149874671-1');
+    </script>
+
+
+
+
+
+<script>
+    function initialTyped () {
+        var typedTextEl = $('.typed-text');
+        if (typedTextEl && typedTextEl.length > 0) {
+            var typed = new Typed('.typed-text', {
+                strings: ["Think like an artist, develop like an artisan", "艺术家思维去思考问题，工匠创造精神去开发"],
+                typeSpeed: 90,
+                loop: true,
+                loopCount: Infinity,
+                backSpeed: 20,
+            });
+        }
+    }
+
+    if ($('.article-header') && $('.article-header').length) {
+        $(document).ready(function () {
+            initialTyped();
+        });
+    }
+</script>
+
+
+
+
+</html>

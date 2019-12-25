@@ -1,0 +1,580 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Customize VIM to work efficiently with OpenFOAM - Part 2 - FoamScience</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="FoamScience OpenFOAM,"> 
+    <meta name="description" content="We’ve seen in the previous part some ways to improve our interaction with OpenFOAM case directories,"> 
+    <meta name="author" content="Fadeli Mohamed Elwardi"> 
+    <link rel="alternative" href="atom.xml" title="FoamScience" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link href="https://fonts.loli.net/css?family=Roboto+Mono|Rubik&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+    <link rel="stylesheet" href="/css/obsidian.css">
+    <link rel="stylesheet" href="/css/ball-atom.min.css">
+
+  <link rel="amphtml" href="https://foamscience.github.io/productivity/customize-vim-to-work-efficiently-with-openfoam-part-2//amp/index.html">
+
+</head>
+</html>
+
+<body class="loading">
+    <div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <span id="config-title" style="display:none">FoamScience</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://foamscience.github.io">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">Customize VIM to work efficiently with OpenFOAM - Part 2</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="douban,diandian,tencent"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="section">
+        <div class=article-header-wrapper>
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(https://s2.ax1x.com/2019/09/18/n7E8Wd.png);">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="/categories/productivity"><b>「
+                    </b>PRODUCTIVITY<b> 」</b></a>
+                
+                August 28, 2018
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/productivity/customize-vim-to-work-efficiently-with-openfoam-part-2/" title="Customize VIM to work efficiently with OpenFOAM - Part 2">Customize VIM to work efficiently with OpenFOAM - Part 2</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>Words count</i>
+                    17k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                    15 mins.
+                </span>
+                
+                
+                
+                <span id="busuanzi_container_page_pv">
+                    <b class="iconfont icon-read"></b> <i>Read count</i>
+                    <span id="busuanzi_value_page_pv">0</span>
+                </span>
+                
+            </p>
+            
+            
+            <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/OpenFOAM/">OpenFOAM</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Vim/">Vim</a></li></ul>
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s">Working in the right directory and easier file navigation aren't productive enough,  we need a way to run OpenFOAM commands right from inside VIM while editing files</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class='main'>
+        <div class="content markdown animated fadeIn">
+            <p>We’ve seen in <a href="/vim-openfoam-power-part1">the previous part</a> some ways to improve our interaction with OpenFOAM case directories and files. In this new post, we want to implement something that facilitates running <code>blockMesh</code>, or the case solver, right from inside VIM; without going back to the shell. Of course, our implementation should catch errors in the quick fix list (if there are any),  then go to the concerned file, and put the cursor on the error line.</p>
+<p>For this, we’ll use two main VIM facilities: <em>VIM compilers</em> and <em>QuickFix</em> list.<br>The compilers are used to automatically run a shell command on a file; For example:</p>
+<ul>
+<li>Running a <code>gcc</code> (or <code>make</code> if there is a <em>makeFile</em>) command on a <code>*.cpp</code> file would compile it to an executable, </li>
+<li>Running a <code>pdflatex</code> (or better <code>latexmk</code>) command on a <em>Latex file</em> would compile a PDF version of the document.</li>
+<li>Running a <code>blockMesh</code> command on a <em>blockMeshDict</em> would build the mesh and check for errors in <code>blockMesh</code>‘s output.</li>
+</ul>
+<p>In fact, we can run as many commands as we want on the file using VIM compilers. Think: Generate the mesh, check its validity, set fields and run appropriate solvers (In my opinion, this kind of work-flows beats GUIs to death).</p>
+<p>So, let’s get to work: We need to know how VIM’s default compiler plugins are set, and the best way to learn is by looking at examples. On Unix systems, the default compilers should be in <code>/usr/share/vim/vim74/compiler</code> directory, you can use VIM’s ex-command <code>:compile</code> to find out where  they are on your system.</p>
+<h2 id="Studying-an-example-VIM-compiler"><a href="#Studying-an-example-VIM-compiler" class="headerlink" title="Studying an example VIM compiler"></a>Studying an example VIM compiler</h2><p>First of all, a VIM compiler plugin is nothing more than a short <code>VimL</code> script, configuring two main things: <code>errorformat</code> (scanf-style strings, separated by commas, showing the format of error lines) and <code>makeprg</code> (make program, the shell executable to run).</p>
+<p>As an example, let’s go through the <em>ant-compiler</em> line by line:</p>
+<pre><code class="vim">&quot; Vim Compiler File
+&quot; Compiler:    ant
+&quot; Maintainer:    Johannes Zellner &lt;johannes@zellner.org&gt;
+&quot; Last Change:    Mi, 13 Apr 2005 22:50:07 CEST</code></pre>
+<p>The header, just for information, then we have some checks to perform:</p>
+<pre><code class="vim">if exists(&quot;current_compiler&quot;)
+    finish
+endif
+let current_compiler = &quot;ant&quot;
+
+if exists(&quot;:CompilerSet&quot;) != 2        &quot; older Vim always used :setlocal
+  command -nargs=* CompilerSet setlocal &lt;args&gt;
+endif</code></pre>
+<p>The first if structure checks if the compiler is already set (if it’s the case, vim will leave the script). If not, it<br>declares <code>current_compiler</code> as *”ant”* (so, the next time the script executes, it will be finished in the first if structure). The second if statement sets compatibility stuff for older VIM versions.</p>
+<p>All the <code>cpo</code>-related stuff are set to configure Vi-compatibility options, we don’t need to learn about this topic, just don’t touch those lines!</p>
+<p>The line <code>CompilerSet makeprg=ant</code> sets the ant program as the make program (when you execute the ex-command <code>:make</code>, VIM runs <code>ant</code> in a shell, and watches for its output).</p>
+<p><code>CompilerSet errorformat=\ %#[%.%#]\ %#%f:%l:%v:%*\\d:%*\\d:\%t%[%^:]%#:%m</code> shows VIM how to find the error line and what to extract from it (explained in more details in the next section).</p>
+<pre><code class="vim">let s:cpo_save = &amp;cpo
+set cpo&amp;vim
+
+CompilerSet makeprg=ant
+&quot; first  line:
+&quot;     ant with jikes +E, which assumes  the following
+&quot;     two property lines in your &#39;build.xml&#39;:
+&quot;
+&quot;         &lt;property name = &quot;build.compiler&quot;       value = &quot;jikes&quot;/&gt;
+&quot;         &lt;property name = &quot;build.compiler.emacs&quot; value = &quot;true&quot;/&gt;
+&quot;
+&quot; second line:
+&quot;     ant with javac
+&quot;
+&quot; note that this will work also for tasks like [wtkbuild]
+&quot;
+CompilerSet errorformat=\ %#[%.%#]\ %#%f:%l:%v:%*\\d:%*\\d:\ %t%[%^:]%#:%m,
+    \%A\ %#[%.%#]\ %f:%l:\ %m,%-Z\ %#[%.%#]\ %p^,%C\ %#[%.%#]\ %#%m
+
+&quot; ,%-C%.%#
+
+let &amp;cpo = s:cpo_save
+unlet s:cpo_save</code></pre>
+<h3 id="Using-errorformats-to-catch-OpenFOAM-Fatal-Errors"><a href="#Using-errorformats-to-catch-OpenFOAM-Fatal-Errors" class="headerlink" title="Using errorformats to catch OpenFOAM Fatal Errors"></a>Using errorformats to catch OpenFOAM Fatal Errors</h3><p>These <em>errorformats</em> are similar to regular expressions. Assume a program outputting errors in the following format:</p>
+<p><code>Error: something-is-wrong in /path/to/file at line 25</code></p>
+<p>To match this error line, we use a single scanf-style string, that may contain special items (these are the most important ones):</p>
+<ul>
+<li><code>%f</code> matches a file name (a string), eg. <em>/path/to/file</em></li>
+<li><code>%l</code> matches a line number (digits), eg. <em>25</em></li>
+<li><code>%m</code> matches an error message, eg. <em>something-is-wrong</em></li>
+<li><code>%*{conv}</code> converts stuff from regexp to scanf string, eg. %*[a-z] matches any number of lowercase alphabets.</li>
+</ul>
+<p>Thus, the example line would be matched with <code>\Error: %m in %f at line %l</code></p>
+<h2 id="Building-a-compiler-plugin-for-blockMesh"><a href="#Building-a-compiler-plugin-for-blockMesh" class="headerlink" title="Building a compiler plugin for blockMesh"></a>Building a compiler plugin for blockMesh</h2><p>The goal of this section is to build a blockMesh-compiler for VIM which can be used to browse errors when the tool fails. For this, we need to create our custom-compilers directory <code>$HOME/.vim/compiler</code>.</p>
+<p>Copy the <code>ant.vim</code> compiler to that directory and rename it as <code>blockMesh.vim</code>, on Unix systems, one can say:</p>
+<pre><code class="bash">cp /usr/share/vim/vim74/compiler/ant.vim ~/.vim/compiler/blockMesh.vim</code></pre>
+<p>Modify the header so it suits your preferences, and then start building the custom VIM compiler:</p>
+<ul>
+<li>Hopefully, you are editing the file with VIM.</li>
+<li>Change all occurrences of “<em>ant</em>“ to “<em>blockMesh</em>“ in the file <code>:%s/ant/blockMesh/g</code></li>
+<li>Time to set the “errorformat”: We know that OpenFOAM displays errors in multiple<br>lines (if you write “hxe” instead of “hex” in a <em>blockMeshDict</em>):</li>
+</ul>
+<pre><code class="text">--&gt; FOAM FATAL IO ERROR:
+CellShape has unknown model on line 45 the word &#39;hxe&#39;
+file: /home/elwardi/OpenFOAM/elwardi-4.1/run/movingCone/system/blockMeshDict.blocks at line 45.</code></pre>
+<p>Note that this is NOT a general FOAM ERROR; some other IO errors specify a range of lines; others suggest solutions before stating the error-line.</p>
+<p>The most important line is probably the one stating the filename, and the exact line to jump to (these will be stored in <code>%f</code> and <code>%l</code> respectively).However, there are some problems in the filename: notice the ending <code>.blocks</code> appended to it, in fact, things could be messier: <code>.ddtschemes.default</code>.</p>
+<p>How many dots are there in the filename? The real problem is that the <code>path/to/case</code> always contains a dot character (frrom the OpenFOAM version, eg. user-4.1), so matching from the start of the path to the first dot character won’t work!</p>
+<p>Instead, we do notice that versions are expressed in digits, and that case names usually contain no dots (hopefully); so, matching the path up to the first dot character preceding an alphabet character is a good idea:<br><code>CompilerSet errorformat=\file:\ %f\.%[a-z]%*[a-z\ ]\ line\ %l\.</code></p>
+<ul>
+<li><code>%f</code> matches the string “file: “ at the start of line, then starts storing the filename up to the first dot that falls immediately before a lowercase alphabet character (hopefully, that’s the keyword <code>.blocks</code>, or <code>.fvSchemes</code> …). Then we’ll have  some lowercase characters and spaces until we reach the last line before “line” string,  then <code>%l</code> catches the line number (in case there are two, it catches the last one!).</li>
+</ul>
+<p>Now, what to tell the user? Well, It’s good to have a message at the status line saying “<em>CellShape has unknown model …</em>“, so, we should use a complex multi-line <em>errorformat</em>! But, still we’ll have to deal with the problem of how many lines are there between the line that tells our message and the line that spells out the error line. </p>
+<p>This is actually troublesome, so, I’ve decided to approach the situation differently: We leave our filename and error-line alone, and add another error that captures only the message (using a simple multi-line error-format).</p>
+<pre><code class="vim">CompilerSet errorformat=\file:\ %f\.%[a-z]%*[a-z\ ]\ line\ %l\.
+                        \%E--&gt;\ %*[A-Z:\ ],%Z%m</code></pre>
+<ul>
+<li><code>%E</code> denotes the start of a multi-line error.</li>
+<li>Then we find the line saying <code>Fatal IO Error</code> (starts with –&gt; then there are some uppercase letters,semicolons, and spaces).</li>
+<li><code>%Z</code> denotes the end of multi-line error (which is only one line here!) then we capture everything in the second line as a <code>%m</code> (an error message).</li>
+</ul>
+<p>The compiler plugin is now complete:</p>
+<pre><code class="vim">&quot; Vim Compiler File
+&quot; Compiler: blockMesh
+&quot; Fadeli Mohammed Elwardi &lt;foamscience.github.io&gt;
+
+if exists(&quot;current_compiler&quot;)
+finish
+endif
+
+let current_compiler = &quot;blockMesh&quot;
+
+if exists(&quot;:CompilerSet&quot;) != 2
+&quot; older Vim always used :setlocal
+command -nargs=* CompilerSet setlocal &lt;args&gt;
+endif
+
+let s:cpo_save = &amp;cpo
+set cpo&amp;vim
+
+CompilerSet makeprg=blockMesh
+CompilerSet errorformat=
+                 \\file:\ %f\.%[a-z]%*[a-z\ ]\ line\ %l\.,
+                 \%E-&gt;\ %*[A-Z:\ ],%Z%m
+
+let &amp;cpo = s:cpo_save
+unlet s:cpo_save</code></pre>
+<p>And you should be ready to test it with a sample (erroneous) <code>blockMeshDict</code>:</p>
+<ol>
+<li>Make something of importance go wrong in a <code>blockMeshDict</code> (the last ; in a block is not that important).</li>
+<li>While editing <code>blockMeshDict</code>, run <code>:compile blockMesh</code> to set the correct compiler (We’ll improve on this).</li>
+<li>Hopefully your working directory is set by our previous <code>customFoam</code> script, if it is the case, run the ex-command <code>:make</code> and check that beautiful (and useful) error message!</li>
+<li>To automatically jump to the error line, type <code>:cn</code> (short of cnext).</li>
+</ol>
+<blockquote>
+<p>The error format can’t handle “from line 15 to line 18.” lines, because no file path will be output in such lines!</p>
+</blockquote>
+<p>Now that VIM knows how to handle <code>blockMesh</code>, let’s introduce it to the other FOAM applications (we’ll be doing just solvers for illustration). Wait, should we repeat the work done previously tens of times? Absolutely not.</p>
+<p>The goal of this blog post is to achieve this work-flow:</p>
+<ol>
+<li>When I read in a FOAM File, VIM changes its working dir. to case dir. (already implemented in <code>customFoam.vim</code>, see <a href="/vim-openfoam-power-part1">this earlier post</a>)</li>
+<li>VIM looks for the suitable OpenFOAM solver for the current case (mentioned in <code>controlDict</code>).</li>
+<li>VIM sets the right solver as the <code>makeprg</code> automatically.</li>
+<li>When I run <code>:make</code> (Or press a shortcut to it), VIM will filter the output to show me the errors if there are any.</li>
+</ol>
+<p>One more thing, I want my own solvers to be involved, so, I won’t generate a list of standard solvers and compare anything to its content. That’s one lousy approach to take!</p>
+<p>Instead, I’m going to define two functions: The first one, in <code>customFoam.vim</code>, which searches and stores the solver name, and the second sets the option <code>makeprg</code> dynamically in a general compiler plugin called <code>foam.vim</code>.</p>
+<h2 id="Use-FOAMGetApplication-to-get-solver-name"><a href="#Use-FOAMGetApplication-to-get-solver-name" class="headerlink" title="Use FOAMGetApplication to get solver name"></a>Use FOAMGetApplication to get solver name</h2><p>From any file in the case dir., we can tell VIM what solver is to be used with the current case because it’s mentioned in the <code>controlDict</code> file. Actually, we have two options here:</p>
+<ul>
+<li>Use VIM to take a look at <code>controlDict</code>, and store a string representing the solver name.</li>
+<li>Or, do it the FOAM way (use run functions: <code>getApplication</code>), which needs a working Installation of OpenFOAM (but that’s Ok, you won’t be reading this guide otherwise). This method is heavily used in <code>.Allrun</code> shell scripts.</li>
+</ul>
+<p>In order to learn how VIM interacts with the system, we’ll use the second option: We’ll add a <code>FOAMGetApplication()</code> function to our <code>customFoam.vim</code></p>
+<pre><code class="vim">function! FOAMGetApplication()
+    &quot; Source run functions and execute getApplication
+    let cmd=&quot;. $WM_PROJECT_DIR/bin/tools/RunFunctions &amp;&amp; getApplication&quot;
+    let foamApp=system(cmd)[:-2]
+    echomsg &#39;This case is set to be simulated with: &#39;.foamApp
+    return foamApp
+endfunction</code></pre>
+<ul>
+<li><code>cmd</code> is a string, representing the shell command that sources run functions and then executes <code>getApplication</code> in the current case dir.</li>
+<li><code>foamApp</code> is the output of the previous command (solver name), the <code>[:-2]</code> part deletes the last two characters from the output of the command (by default, It will output <code>icoFoam @</code>, the last two characters are not needed).</li>
+<li><code>echomsg</code> writes messages to the status line, and keeps them in messages list (run <code>:messages</code>).</li>
+</ul>
+<h2 id="The-general-VIM-compiler-plugin-for-OpenFOAM"><a href="#The-general-VIM-compiler-plugin-for-OpenFOAM" class="headerlink" title="The general VIM compiler plugin for OpenFOAM"></a>The general VIM compiler plugin for OpenFOAM</h2><p>Copy <code>blockMesh.vim</code> to <code>foam.vim</code>.</p>
+<ul>
+<li>Don’t forget <code>let current_compiler = &quot;foam&quot;</code></li>
+<li>Declare a script variable, storing the solver name<br><code>let s:foamApp = FOAMGetApplication()</code></li>
+<li>Instead of <code>CompilerSet</code>, define a new function setting the compiler to the solver name, then call it.</li>
+</ul>
+<pre><code class="vim">function! FOAMSetCompiler()
+    exe &#39;CompilerSet makeprg=&#39;.s:foamApp
+endfunction
+call FOAMSetCompiler()</code></pre>
+<ul>
+<li>For the file line in the error format, use<br><code>\\file:\ %f\.%*[a-zA-Z]%*[a-zA-Z\ .]\ line\ %l%*[.a-zA-Z0-9\ ]</code><br>So we can cover stuff like “from line 15 to line 20.” and be more dynamic with the number of dots in the filename (handle things like <code>0/U.boundaryField.inlet</code>). Done!! We are ready to go!</li>
+</ul>
+<h2 id="Final-tweaks-VIM’s-auto-commands"><a href="#Final-tweaks-VIM’s-auto-commands" class="headerlink" title="Final tweaks: VIM’s auto-commands"></a>Final tweaks: VIM’s auto-commands</h2><p>We only need to tell VIM to set the compiler to “foam” whenever a Foam File is opened; and to set the compiler to <code>blockMesh</code> if the entered buffer is named <code>blockMeshDict</code>.</p>
+<pre><code class="vim">augroup FOAMautocmds
+autocmd!
+autocmd FileType foam* call FOAMSetPathToCaseDir()
+autocmd FileType foam* compile foam
+autocmd BufEnter *blockMeshDict compile blockMesh
+augroup End</code></pre>
+<blockquote>
+<p><em>FileType</em> autocmds will <em>always</em> be executed before <em>BufEnter</em> ones, so <code>blockMeshDict</code> files will always have <code>blockMesh</code> as their compiler.</p>
+</blockquote>
+<p>The complete configuration files can be downloaded from here: <a href="https://drive.google.com/uc?id=1Sf-6Pm8twy8dM6YIcWZ8lMFaem2S2F0O&export=download" class="btn" target="_blank" rel="noopener">VIM Customization</a> </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls"
+                data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+            <ul id="audio-list" style="display:none">
+                
+                
+                <li title='0' data-url='/statics/chengdu.mp3'></li>
+                
+                    
+            </ul>
+            
+            
+            
+        </div>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="https://res.cloudinary.com/tridiamond/image/upload/v1573019751/TriDiamond_logo_ui_xeublz.jpg" height=300 width=300></img>
+                    <p>Fadeli Mohamed Elwardi</p>
+                    <span>Think like an artist, develop like an artisan</span>
+                    <dl>
+                        <dd><a href="https://github.com/FoamScience" target="_blank"><span
+                                    class=" iconfont icon-github"></span></a></dd>
+                        <dd><a href="https://twitter.com/Elwardi-Fadeli" target="_blank"><span
+                                    class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="https://stackoverflow.com/users/7602324/elwardifadeli?tab=profile" target="_blank"><span
+                                    class=" iconfont icon-stack-overflow"></span></a></dd>
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">14 <p>Articles</p></a></li>
+                    <li><a href="/categories">5 <p>Categories</p></a></li>
+                    <li><a href="/tags">14 <p>Tags</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>Contents</h4>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Studying-an-example-VIM-compiler"><span class="toc-number">1.</span> <span class="toc-text">Studying an example VIM compiler</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Using-errorformats-to-catch-OpenFOAM-Fatal-Errors"><span class="toc-number">1.1.</span> <span class="toc-text">Using errorformats to catch OpenFOAM Fatal Errors</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Building-a-compiler-plugin-for-blockMesh"><span class="toc-number">2.</span> <span class="toc-text">Building a compiler plugin for blockMesh</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Use-FOAMGetApplication-to-get-solver-name"><span class="toc-number">3.</span> <span class="toc-text">Use FOAMGetApplication to get solver name</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-general-VIM-compiler-plugin-for-OpenFOAM"><span class="toc-number">4.</span> <span class="toc-text">The general VIM compiler plugin for OpenFOAM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Final-tweaks-VIM’s-auto-commands"><span class="toc-number">5.</span> <span class="toc-text">Final tweaks: VIM’s auto-commands</span></a></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div>
+</body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2019
+        <span class="gradient-text">
+            Fadeli Mohamed Elwardi
+        </span>.
+        Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+        Theme
+        <span class="gradient-text">
+            <a href="https://github.com/TriDiamond/hexo-theme-obsidian" title="Obsidian" target="_blank" rel="noopener">Obsidian</a>
+        </span>
+        <small><a href="https://github.com/TriDiamond/hexo-theme-obsidian/blob/master/CHANGELOG.md" title="v1.4.4" target="_blank" rel="noopener">v1.4.4</a></small>
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/vim/vim.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/vbscript/vbscript.min.js"></script>
+
+
+
+    <script src="/js/busuanzi.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            if ($('span[id^="busuanzi_"]').length) {
+                initialBusuanzi();
+            }
+        });
+    </script>
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-149874671-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-149874671-1');
+    </script>
+
+
+
+
+
+<script>
+    function initialTyped () {
+        var typedTextEl = $('.typed-text');
+        if (typedTextEl && typedTextEl.length > 0) {
+            var typed = new Typed('.typed-text', {
+                strings: ["Think like an artist, develop like an artisan", "艺术家思维去思考问题，工匠创造精神去开发"],
+                typeSpeed: 90,
+                loop: true,
+                loopCount: Infinity,
+                backSpeed: 20,
+            });
+        }
+    }
+
+    if ($('.article-header') && $('.article-header').length) {
+        $(document).ready(function () {
+            initialTyped();
+        });
+    }
+</script>
+
+
+
+
+</html>

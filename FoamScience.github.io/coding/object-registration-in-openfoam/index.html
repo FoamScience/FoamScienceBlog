@@ -1,0 +1,475 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Object Registration in OpenFOAM - FoamScience</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="FoamScience OpenFOAM,"> 
+    <meta name="description" content="Being aware of all the important variables during the simulation is a nice feature to have in any C,"> 
+    <meta name="author" content="Fadeli Mohamed Elwardi"> 
+    <link rel="alternative" href="atom.xml" title="FoamScience" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link href="https://fonts.loli.net/css?family=Roboto+Mono|Rubik&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+    <link rel="stylesheet" href="/css/obsidian.css">
+    <link rel="stylesheet" href="/css/ball-atom.min.css">
+
+  <link rel="amphtml" href="https://foamscience.github.io/coding/object-registration-in-openfoam//amp/index.html">
+
+</head>
+</html>
+
+<body class="loading">
+    <div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <span id="config-title" style="display:none">FoamScience</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://foamscience.github.io">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">Object Registration in OpenFOAM</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="douban,diandian,tencent"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="section">
+        <div class=article-header-wrapper>
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(/assets/images/ionic2-banner.png);">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="/categories/coding"><b>「
+                    </b>CODING<b> 」</b></a>
+                
+                September 12, 2019
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/coding/object-registration-in-openfoam/" title="Object Registration in OpenFOAM">Object Registration in OpenFOAM</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>Words count</i>
+                    10k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                    9 mins.
+                </span>
+                
+                
+                
+                <span id="busuanzi_container_page_pv">
+                    <b class="iconfont icon-read"></b> <i>Read count</i>
+                    <span id="busuanzi_value_page_pv">0</span>
+                </span>
+                
+            </p>
+            
+            
+            <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Cpp/">Cpp</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/OpenFOAM/">OpenFOAM</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Programming/">Programming</a></li></ul>
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s">This article introduces you to how amazing OpenFOAM is in keeping track of directly and indirectly managed variables in a solver using its objectRegistry and regIOobject classes.</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class='main'>
+        <div class="content markdown animated fadeIn">
+            <p>Being aware of all the important variables during the simulation is a nice feature to have in any CFD software. I’ve even seen some software developers “brag” about how many “variables” their simulators efficiently manage at run time.  Today, we’ll discover how OpenFOAM solvers <strong>keep track</strong> of model data used across libraries.</p>
+<h2 id="Know-the-difference-between-Object-Registration-and-Run-Time-Selection-Table"><a href="#Know-the-difference-between-Object-Registration-and-Run-Time-Selection-Table" class="headerlink" title="Know the difference between Object Registration and Run-Time Selection Table"></a>Know the difference between Object Registration and Run-Time Selection Table</h2><blockquote>
+<p>By “Object registration” I don’t mean “Model registration” (The mechanism allowing for reporting possible models if the user input is unexpected, eg. if using a non-existent Boundary Condition Type). I refer instead to the mechanism allowing the program to retrieve references to all sorts of “data” objects (volScalarFields … etc) that are under the solver’s direct or indirect control. Read this section to make sense of the difference.</p>
+</blockquote>
+<p>Traditional C++ programming will probably employ “Factory-like” design to create new objects: A virtual base class will have a <code>static create()</code> (or a <code>static New()</code> in the case of OpenFOAM classes) to create a pointer (of some kind) to the newly created model.</p>
+<p>This traditional technique is used when the programmer wants to give users the ability to “<strong>select</strong>“ a model from a set of pre-defined ones (Child classes of the base class). </p>
+<p>It’s common in OpenFOAM to give the virtual base class (usually belonging to the <code>Foam</code> namespace) a static <code>New()</code> method returning an <code>autoPtr</code> to the newly created instance of the model class (<code>autoPtr</code> is used so that the created object couldn’t be referred to by more than <em>one</em> pointer). Of course, “templates” may complicate things a bit more, but nothing we can’t live with.</p>
+<p>This <code>New()</code> method would typically read the model’s name from a dictionary, check if such model is “registered” to the RunTime selection Table, then construct an object of the appropriate type. This process is referred to as “selection of a model”.</p>
+<blockquote>
+<p>Note that if another library wants to provide a child for such base class, it has to statically link the base class’s library (at compile time). That is to say, if a library <code>transportModels.so</code> has a <code>phase</code> base class which already has some child classes (say <code>incompressiblePhase</code> and <code>gasPhase</code>) and you want to add a phase object for your specific solver, you can build a new library <code>myPhaseModels.so</code> which must statically link <code>transportModels.so</code> so it can be compiled. It’s that simple, you just create your new <code>compositionalPhase</code> class (inheriting from <code>phase</code>) and it will show up in the selection table when you load the library (in <code>controlDict</code> of your case).</p>
+</blockquote>
+<p>Older C++ code would contain overloaded versions of <code>New()</code> (each returning a different type) but OpenFOAM uses templates and a collection of Macros to construct a <code>RunTimeSelectionTable</code> which <code>New</code> uses to check for existence and select the model.</p>
+<p>But that’s not the goal of this post. Let’s instead dive into the registration of model data. For example, consider the case of a library trying to access a field that is created and managed by another library! To illustrate, say we have some library <code>transportModels.so</code> whose basic <code>transportModel</code> class has a member <code>volScalarField rho</code>. Suppose we’re working on another library and we need a (maybe <code>const</code>) reference to this field without actually statically linking <code>transportModels.so</code> (Say, this would result in a <strong>cyclic dependency</strong> between the two libraries). How would one get a reference to such field?</p>
+<p>That’s exactly the situation we need object registration for.</p>
+<h2 id="OpenFOAM-objectRegistry-and-regIOobject"><a href="#OpenFOAM-objectRegistry-and-regIOobject" class="headerlink" title="OpenFOAM objectRegistry and regIOobject"></a>OpenFOAM objectRegistry and regIOobject</h2><p>OpenFOAM solvers keep a “hierarchical database”, logging objects at different levels:</p>
+<ul>
+<li>The master registry is always the Time object (<code>runTime</code>).</li>
+<li>The second-level in the database logs mesh regions and the global <code>controlDict</code>.</li>
+<li>The lower levels  register “sub-objects” (eg. Each mesh region would have its own <code>fvSchemes</code>, <code>fvSolution</code>, mesh data, the fields associated to the mesh region - created in <code>createFields.H</code> … etc) </li>
+</ul>
+<p>Note that each object in the database “can be” a database of registered objects allowing for the hierarchical structure; and by “mesh regions” I mean different mesh objects (for example, a mesh for fluids and another for solid regions in fluid-solid interaction simulations).</p>
+<blockquote>
+<p>If two “Time instances” are used in a solver, we would have two independent databases; and it makes complete sense!</p>
+</blockquote>
+<p>For illustration, standard solvers databases would look like this:</p>
+<pre><code class="bash">* runTime         # objectRegistry
+ |--&gt; controlDict # regIOobject (can&#39;t have sub-entries attached to it)
+ |--&gt; mesh1       # objectRegistry (a database)
+    |--&gt; points, owner, neighbour, cellZones ...
+    |--&gt; fvSchemes, fvSolution
+    |--&gt; U, p
+ |--&gt; mesh2
+    |--&gt; points, owner, neighbour, cellZones ...
+    |--&gt; fvSchemes, fvSolution
+    |--&gt; U, p</code></pre>
+<blockquote>
+<p>This Hierarchy is kept in memory, but the same class handles how it’s written to disk.</p>
+</blockquote>
+<p>The database class is called <code>objectRegistry</code> (so it’s a database and an entry in a database at the same time), and in order for objects to auto-register to a database, they must inherit from <code>regIOobject</code> class.</p>
+<p>The inheritance from <code>regIOobject</code> promotes the object into an auto-registered object and it requires to implement the pure virtual member function <code>writeData()</code> (not <code>write()</code>) so that when the database issues the order of writing to disk to all its child entries, the child will be able to write itself properly :</p>
+<pre><code class="cpp">virtual bool writeData(Ostream&amp;) const;</code></pre>
+<p>An example of a simple, non-standard class which inherits from <code>regIOobject</code> is the basic <code>well</code> class in my <a href="https://github.com/FoamScience/OpenRSR/blob/master/libs/wellModels/wells/well/well.H" target="_blank" rel="noopener">Reservoir Simulation toolkit</a>. A well can then be written to disk as a regular dictionary.</p>
+<h2 id="Cross-library-interaction-in-OpenFOAM"><a href="#Cross-library-interaction-in-OpenFOAM" class="headerlink" title="Cross library interaction in OpenFOAM"></a>Cross library interaction in OpenFOAM</h2><p>Now that we all have a good understanding of the hierarchical registration in OpenFOAM, let’s dive into how to use such mechanism for our benefit.</p>
+<p>In practice, when writing OpenFOAM libraries, it’s common to pass a mesh reference to the base model’s constructor (You can do very little without a reference to the mesh, really). Thus, the mesh is the number-one database to log our objects to: Which database to use is decided at the object’s construction time (by calling <code>regIOobject</code>‘s  constructor with the right third parameter). </p>
+<p>In standard solvers, the mesh is created by passing an <code>IOobject</code> to the constructor of the parent class <code>polyMesh</code> which passes it to <code>objectRegistry</code>‘s  constructor:</p>
+<pre><code class="cpp">// fvMesh is an objectRegistry
+Foam::fvMesh mesh
+(
+    Foam::IOobject
+    (
+        Foam::fvMesh::defaultRegion,
+        runTime.timeName(),
+        runTime,    // That&#39;s the database we branch into
+        Foam::IOobject::MUST_READ
+    )
+);</code></pre>
+<blockquote>
+<p>And you can verify that the <code>Time</code> class is not registered to anything.</p>
+</blockquote>
+<p>Now, say we registered a <code>volScalarField</code> with the name of “fName” to the previous mesh object  (See <code>createFields.H</code> file of any standard solver for examples). How can we refer to it in a Boundary Condition Type we’re adding?</p>
+<p>Well, that’s easy, we just use <code>fvMesh</code>‘s interface:</p>
+<pre><code class="cpp">// Const-ref to the field named fName
+const volScalarField&amp; fN = mesh.lookupObject(&quot;fName&quot;);
+// Ref to the field named fName
+volScalarField&amp; fN = mesh.lookupObjectRef(&quot;fName&quot;);</code></pre>
+<p>Well, for a more sophisticated way, we may give the user the option of selecting the field’s name:</p>
+<pre><code class="cpp">// Read the name if provided
+word theName = someDict.lookupOrDefault&lt;word&gt;(&quot;fieldName&quot;,&quot;fName&quot;);
+// Const-ref to the field named fName
+const volScalarField&amp; fN = mesh.lookupObject(theName);</code></pre>
+<p>This particular trick may complicate things for beginners with all the “<strong>didn’t find a field in the database</strong>“ Fatal Errors, but it’s a decent way to program things in OpenFOAM. Anyway, I hope this article clarified at least what the third argument to <code>IOobject</code>‘s constructor is meant to do <span class="emoji" style="background-image: url(https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8)" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8">&#x1f604;</span></p>
+<p>If you have any suggestions or comments on this matter, don’t hesitate, fire at me bellow.</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls"
+                data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+            <ul id="audio-list" style="display:none">
+                
+                
+                <li title='0' data-url='/statics/chengdu.mp3'></li>
+                
+                    
+            </ul>
+            
+            
+            
+        </div>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="https://res.cloudinary.com/tridiamond/image/upload/v1573019751/TriDiamond_logo_ui_xeublz.jpg" height=300 width=300></img>
+                    <p>Fadeli Mohamed Elwardi</p>
+                    <span>Think like an artist, develop like an artisan</span>
+                    <dl>
+                        <dd><a href="https://github.com/FoamScience" target="_blank"><span
+                                    class=" iconfont icon-github"></span></a></dd>
+                        <dd><a href="https://twitter.com/Elwardi-Fadeli" target="_blank"><span
+                                    class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="https://stackoverflow.com/users/7602324/elwardifadeli?tab=profile" target="_blank"><span
+                                    class=" iconfont icon-stack-overflow"></span></a></dd>
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">14 <p>Articles</p></a></li>
+                    <li><a href="/categories">5 <p>Categories</p></a></li>
+                    <li><a href="/tags">14 <p>Tags</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>Contents</h4>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Know-the-difference-between-Object-Registration-and-Run-Time-Selection-Table"><span class="toc-number">1.</span> <span class="toc-text">Know the difference between Object Registration and Run-Time Selection Table</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OpenFOAM-objectRegistry-and-regIOobject"><span class="toc-number">2.</span> <span class="toc-text">OpenFOAM objectRegistry and regIOobject</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cross-library-interaction-in-OpenFOAM"><span class="toc-number">3.</span> <span class="toc-text">Cross library interaction in OpenFOAM</span></a></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div>
+</body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2019
+        <span class="gradient-text">
+            Fadeli Mohamed Elwardi
+        </span>.
+        Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+        Theme
+        <span class="gradient-text">
+            <a href="https://github.com/TriDiamond/hexo-theme-obsidian" title="Obsidian" target="_blank" rel="noopener">Obsidian</a>
+        </span>
+        <small><a href="https://github.com/TriDiamond/hexo-theme-obsidian/blob/master/CHANGELOG.md" title="v1.4.4" target="_blank" rel="noopener">v1.4.4</a></small>
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/vim/vim.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/vbscript/vbscript.min.js"></script>
+
+
+
+    <script src="/js/busuanzi.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            if ($('span[id^="busuanzi_"]').length) {
+                initialBusuanzi();
+            }
+        });
+    </script>
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-149874671-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-149874671-1');
+    </script>
+
+
+
+
+
+<script>
+    function initialTyped () {
+        var typedTextEl = $('.typed-text');
+        if (typedTextEl && typedTextEl.length > 0) {
+            var typed = new Typed('.typed-text', {
+                strings: ["Think like an artist, develop like an artisan", "艺术家思维去思考问题，工匠创造精神去开发"],
+                typeSpeed: 90,
+                loop: true,
+                loopCount: Infinity,
+                backSpeed: 20,
+            });
+        }
+    }
+
+    if ($('.article-header') && $('.article-header').length) {
+        $(document).ready(function () {
+            initialTyped();
+        });
+    }
+</script>
+
+
+
+
+</html>
